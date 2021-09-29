@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--- BOX ICONS --->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="all.min.css">
+
+        <!--- CSS --->
+        <link rel="stylesheet" href="{% static 'css/checklist_style.css'%}">
+
+        <title>Sidebar menu responsive</title>
+    </head>
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+        </header>
+
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="{% url 'products:mainpage'%}" class="nav__logo">
+                        <i class='bx bx-layer nav__logo-icon'></i>
+                        <span class="nav__logo-name">Dis-com</span>
+                    </a>
+
+                    <div class="nav__list">
+                      
+                      <a href="{% url 'products:mainpage'%}" class="nav__link active">
+                        <i class='bx bx-list-plus '></i>
+                        <span class="nav__name">Add Product</span>
+                    
+                    </a>
+
+                    </div>
+                </div>
+
+                <a href="{% url 'accounts:lgout' %}" class="nav__link">
+                    <i class='bx bx-log-out nav__icon' ></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+          <h1 class="title-shop"></h1>
+          <main class="main bd-grid">
+            {% for product in products %}
+              <article class="card">
+                  <div class="card__prices">
+                      <div>
+                         <span class="card__price card__price--now">{{product.name|truncatechars:50}}</span>
+                          <span class="card__price card__price--now">Latest Price : {{product.price}}</span>
+                          <span class="card__price card__price--now">Latest Rating : {{product.rating}}</span>
+                          <span class="card__price card__price--now">Site : {{product.site}}</span>
+                          <span class="card__price card__price--now"><a href="{{product.url}}" class="card__icon">Link</a></span>
+                          <span class="card__price card__price--now"><a href="{%url 'products:delete' product.pk%}">Delete</a></span>
+                          
+                      </div>
+                  </div>
+              </article>
+            {% endfor %}
+          </main>
+
+          <!-- ICONS -->
+          <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+        <!--- MAIN JS --->
+        <script src="{% static 'js/checklist_js.js'%}"></script>
+
+    </body>
+</html>

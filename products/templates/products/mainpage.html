@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% load static %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+
+        <title>Responsive landing page</title>
+    </head>
+    <body>
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-up-arrow-alt scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="{% url 'products:mainpage' %}" class="nav__logo"> 
+                    <img src="{% static 'images/DIS-COM_Logo.jpeg'%}" alt="image" width="150"></a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
+                        <li class="nav__item"><a href="#About" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="#Services" class="nav__link">Services</a></li>
+                        <li class="nav__item"><a href="{% url 'products:myproducts' %}" class="nav__link">My Products</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav__item"><a class="nav__link">Welcome {{user.username}}</a></li>
+                        <li class="nav__item"><a href="{% url 'accounts:lgout' %}" class="nav__link">Logout</a></li>
+                        {% else %}
+                        <li class="nav__item"><a href="{% url 'accounts:login' %}" class="nav__link">Login</a></li>
+                        {% endif %}
+                       <!--   <li class="nav__item"><a href="{% url 'accounts:login' %}" class="nav__link">Sign in</a></li> -->
+
+                        <li><i class='bx bx-toggle-left change-theme' id="theme-button"></i></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-grid-alt'></i>
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="l-main">
+            <!--========== HOME ==========-->
+            <section class="home" id="home">
+                <div class="home__container bd-container bd-grid">
+                  <div class="Search">
+                     <form action="{% url 'products:scrapper'%}" method="POST">
+                        {% csrf_token %}
+                       <input type="text" name="Search" placeholder=" Enter the product's URL here">
+                       <button type="submit" name="button">
+                         <i class='bx bxs-save'></i>
+                       </button>
+                     </form>
+                     </div>
+                    <div class="home__img">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+            <!--========== About ==========-->
+            <section class="About section bd-container" id="About">
+                <div class="About__container bd-grid">
+                    <div class="About__data">
+                        <h2 class="section-title-center">About</h2>
+                        <p class="About__description">UDHSKJNVKJDSHJKVNJKSNKJ IPHJIDNJWEJKNGFGJKNSDJKN NUIEDHUKRENHGJKRHEJ JKDHDKNERJKDNG JKDBHYUJERBGHJKN JKDHUIRHEKJG UDSHVJKRBHGER UDBUIER.</p>
+                    </div>
+
+                    <div class="About__img">
+                        <img src="{% static 'images/Sample (1).svg'%}" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <!--========== Services ==========-->
+            <section class="Services section bd-container" id="Services">
+                <h2 class="section-title">Servicess <br></h2>
+                <div class="Services__container bd-grid">
+                    <div class="Services__data">
+                        <img src="{% static 'images/collecting-2.png'%}" alt="" class="Services__img">
+                        <h4 class="Services__title">Save the item you want to track for price </h4>
+                    </div>
+
+                    <div class="Services__data">
+                        <img src="{% static 'images/Graph-1.png'%}" alt="" class="Services__img">
+                        <h4 class="Services__title">We will analysis the item's price for you</h4>
+                    </div>
+
+                    <div class="Services__data">
+                        <img src="{% static 'images/Notification-1.png'%}" alt="" class="Services__img">
+                        <h4 class="Services__title">And will notify you when there is a price drop</h4>
+                    </div>
+                </div>
+            </section>
+
+            <!--========== Associated ==========-->
+            <section class="Services section bd-container" id="Associated">
+                <h2 class="section-title">Partner E-commerce</h2>
+                <div class="Services__container bd-grid">
+                    <div class="Services__data">
+                        <img src="{% static 'images/flipkart-logo-3.png'%}" alt="" class="Services__img">
+                        <h3 class="Services__title"></h3>
+                        <a href="#" class="button button-link">Go Shopping</a>
+                    </div>
+
+                    <div class="Services__data">
+                        <img src="{% static 'images/amazon-logo-4.jpg'%}" alt="" class="Services__img">
+                        <h3 class="Services__title"></h3>
+                        <a href="#" class="button button-link">Go Shopping</a>
+                    </div>
+
+                    <div class="Services__data">
+                        <img src="{% static 'images/croma-logo.jpg'%}" alt="" class="Services__img">
+                        <h3 class="Services__title"></h3>
+                        <a href="#" class="button button-link">Go Shopping</a>
+                    </div>
+                </div>
+            </section>
+
+          
+
+            <!--========== SEND ==========-->
+            <section class="send section">
+                <div class="send__container bd-container bd-grid">
+                    <div class="send__content">
+                        <h2 class="section-title-center send__title">Newsletter</h2>
+                        <p class="send__description">Subscribe to our newsletter to get the latest updates related to our services.</p>
+                        <form action="">
+                            <div class="send__direction">
+                                <input type="text" placeholder="E-mail ID" class="send__input">
+                                <a href="#" class="button">Subscribe</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="send__img">
+                        <img src="{% static 'images/Sample (2).svg'%}" alt="">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!--========== FOOTER ==========-->
+        <footer class="footer section">
+            <div class="footer__container bd-container bd-grid">
+                <div class="footer__content">
+                    <h3 class="footer__title">
+                        <a href="#" class="footer__logo">Dis-com</a>
+                    </h3>
+                    <p class="footer__description">To get you the best deal for your item</p>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Our Services</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">Saving the item </a></li>
+                        <li><a href="#" class="footer__link">Price Tracking</a></li>
+                        <li><a href="#" class="footer__link">Notifying User</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Our Company</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">Blog</a></li>
+                        <li><a href="#" class="footer__link">About us</a></li>
+                        <li><a href="#" class="footer__link">Our mission</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Social</h3>
+                    <a href="#" class="footer__social"><i class='bx bxl-facebook-circle '></i></a>
+                    <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                    <a href="#" class="footer__social"><i class='bx bxl-instagram-alt'></i></a>
+                </div>
+            </div>
+
+            <p class="footer__copy">&#169; 2021 Dis-com. All right reserved</p>
+        </footer>
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="{% static 'js/main.js'%}"></script>
+    </body>
+</html>
